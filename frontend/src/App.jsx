@@ -41,12 +41,51 @@ const initialApplications = [
 ];
 
 const initialLoans = [
-  { id: "LN-3081", name: "Anita Sharma", status: "active", balance: 8400, category: "Sewing Equipment", mode: "NFC" },
-  { id: "LN-3080", name: "Ravi Prasad", status: "active", balance: 15200, category: "Cart & Equipment", mode: "QR" },
-  { id: "LN-3079", name: "Neelam Gupta", status: "flagged", balance: 4200, category: "Raw Material", mode: "NFC" },
-  { id: "LN-3078", name: "Suresh Pal", status: "active", balance: 19800, category: "Shop Renovation", mode: "QR" },
+  {
+    id: "LN-3081",
+    name: "Jashanjeet Singh",
+    status: "active",
+    balance: 28000,
+    category: "Cart & Equipment",
+    mode: "NFC",
+    originalAmount: 40000,
+    trustScore: 72,
+    repayment: "On track",
+  },
+  {
+    id: "LN-3080",
+    name: "Ravi Kumar",
+    status: "active",
+    balance: 31500,
+    category: "Cart & Equipment",
+    mode: "QR",
+    originalAmount: 50000,
+    trustScore: 81,
+    repayment: "On track",
+  },
+  {
+    id: "LN-3079",
+    name: "Meena Devi",
+    status: "active",
+    balance: 21400,
+    category: "Raw Material",
+    mode: "QR",
+    originalAmount: 30000,
+    trustScore: 64,
+    repayment: "1 late payment",
+  },
+  {
+    id: "LN-3078",
+    name: "Farida Bano",
+    status: "flagged",
+    balance: 17800,
+    category: "Shop Renovation",
+    mode: "NFC",
+    originalAmount: 20000,
+    trustScore: 48,
+    repayment: "2 late payments",
+  },
 ];
-
 const initialMerchants = [
   { id: "MER-201", name: "Bansal Cart Suppliers", category: "Cart & Equipment", location: "Sadar Bazaar, Ludhiana", reader: "NFC + QR", status: "verified" },
   { id: "MER-202", name: "Singh Sewing Traders", category: "Sewing Equipment", location: "Chowk Bazaar, Ludhiana", reader: "QR only", status: "verified" },
