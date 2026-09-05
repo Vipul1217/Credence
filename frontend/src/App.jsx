@@ -808,7 +808,6 @@ export default function App() {
         </div>
 
         {loadingData && <Spinner label="Loading live data..." />}
-        {!loadingData && loadError && <ErrorBanner message={loadError} onRetry={loadAllData} />}
 
         {/* OVERVIEW */}
         {active === "overview" && (
