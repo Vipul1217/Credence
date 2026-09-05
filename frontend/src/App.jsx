@@ -878,33 +878,71 @@ export default function App() {
         )}
 
         {/* ACTIVE LOANS */}
-        {active === "loans" && (
-          <Card>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13.5 }}>
-              <thead>
-                <tr style={{ textAlign: "left", color: C.textMuted, fontSize: 12 }}>
-                  <th style={th}>Borrower</th><th style={th}>Category</th><th style={th}>Balance</th><th style={th}>Disbursement path</th><th style={th}>Status</th><th style={th}></th>
-                </tr>
-              </thead>
-              <tbody>
-                {loans.map(l => (
-                  <tr key={l.id} style={{ borderTop: `1px solid ${C.border}` }}>
-                    <td style={td}><div style={{ fontWeight: 600, color: C.textDark }}>{l.name}</div><div style={{ fontSize: 11.5, color: C.textMuted }}>{l.id}</div></td>
-                    <td style={td}>{l.category}</td>
-                    <td style={td}>₹{l.balance.toLocaleString()}</td>
-                    <td style={td}><ModeBadge mode={l.mode} /></td>
-                    <td style={td}>{l.status === "active" ? <Badge tone="green">Active</Badge> : <Badge tone="red">Frozen</Badge>}</td>
-                    <td style={td}>
-                      <IconBtn icon={l.status === "frozen" ? Check : Flag} tone={l.status === "frozen" ? "green" : "red"}
-                        label={l.status === "frozen" ? "Unfreeze" : "Freeze"} onClick={() => toggleFreeze(l.id)} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </Card>
-        )}
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13.5 }}>
+          <thead>
+            <tr style={{ textAlign: "left", color: C.textMuted, fontSize: 12 }}>
+              <th style={th}>Borrower</th>
+              <th style={th}>Trust Score</th>
+              <th style={th}>Category</th>
+              <th style={th}>Original Amount</th>
+              <th style={th}>Balance</th>
+              <th style={th}>Repayment</th>
+              <th style={th}>Disbursement path</th>
+              <th style={th}>Status</th>
+              <th style={th}></th>
+            </tr>
+          </thead>
 
+          <tbody>
+            {loans.map(l => (
+              <tr key={l.id} style={{ borderTop: `1px solid ${C.border}` }}>
+                <td style={td}>
+                  <div style={{ fontWeight: 600, color: C.textDark }}>{l.name}</div>
+                  <div style={{ fontSize: 11.5, color: C.textMuted }}>{l.id}</div>
+                </td>
+
+                <td style={td}>
+                  <Badge tone={l.trustScore >= 80 ? "green" : l.trustScore >= 60 ? "brown" : "red"}>
+                    {l.trustScore}/100
+                  </Badge>
+                </td>
+
+                <td style={td}>{l.category}</td>
+
+                <td style={td}>
+                  ₹{l.originalAmount.toLocaleString()}
+                </td>
+
+                <td style={td}>
+                  ₹{l.balance.toLocaleString()}
+                </td>
+
+                <td style={td}>
+                  {l.repayment}
+                </td>
+
+                <td style={td}>
+                  <ModeBadge mode={l.mode} />
+                </td>
+
+                <td style={td}>
+                  {l.status === "active"
+                    ? <Badge tone="green">Active</Badge>
+                    : <Badge tone="red">Flagged</Badge>}
+                </td>
+
+                <td style={td}>
+                  <IconBtn
+                    icon={l.status === "frozen" ? Check : Flag}
+                    tone={l.status === "frozen" ? "green" : "red"}
+                    label={l.status === "frozen" ? "Unfreeze" : "Freeze"}
+                    onClick={() => toggleFreeze(l.id)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         {/* MERCHANTS */}
         {active === "merchants" && (
           <Card>
