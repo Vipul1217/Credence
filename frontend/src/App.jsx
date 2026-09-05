@@ -455,6 +455,9 @@ export default function App() {
       const apps = appsRes.items || appsRes;
       const ms = merchRes.items || merchRes;
       const vs = verRes.items || verRes;
+      if (!apps.length || !ls.length || !ms.length || !vs.length) {
+        throw new Error("API returned empty demo data");
+      }
       setApplications(apps.map(a => ({ ...a, date: (a.date_applied || "").slice(0, 10) })));
       setLoans(ls);
       setMerchants(ms.map(m => ({ ...m, reader: m.reader_type, status: m.verification_status })));
