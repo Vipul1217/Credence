@@ -740,10 +740,45 @@ export default function App() {
         {active === "overview" && (
           <>
             <div style={{ display: "flex", gap: 14, marginBottom: 20, flexWrap: "wrap" }}>
-              <Metric label="Disbursed this month" value={`₹${disbursedThisMonth.toLocaleString()}`} sub="Across all active loans" />
-              <Metric label="Active loans" value={loans.filter(l => l.status !== "frozen").length} sub={`${loans.filter(l => l.status === "flagged").length} flagged`} />
-              <Metric label="Pending applications" value={pendingCount} sub="Awaiting officer review" />
-              <Metric label="Verification success rate" value={`${verificationRate}%`} sub="Last 24 hours" />
+              <Metric
+                label="Disbursed this month"
+                value={`₹${disbursedThisMonth.toLocaleString()}`}
+                sub="Across all active loans"
+              />
+
+              <Metric
+                label="Active loans"
+                value={loans.filter(l => l.status !== "frozen").length}
+                sub={`${loans.filter(l => l.status === "flagged").length} flagged`}
+              />
+
+              <Metric
+                label="Pending applications"
+                value={pendingCount}
+                sub="Awaiting officer review"
+              />
+
+              <Metric
+                label="Verification success rate"
+                value={`${verificationRate}%`}
+                sub="Last 24 hours"
+              />
+
+              <Metric
+                label="Avg Trust Score"
+                value={Math.round(
+                  applications.reduce((sum, a) => sum + a.score, 0) / applications.length
+                )}
+                sub="Across applicant portfolio"
+              />
+
+              <Metric
+                label="Safe lending capacity"
+                value={`₹${applications
+                  .reduce((sum, a) => sum + a.safeLimit, 0)
+                  .toLocaleString()}`}
+                sub="Based on Trust Score"
+              />
             </div>
             <Card>
               <div style={{ fontWeight: 700, fontSize: 14.5, marginBottom: 12, color: C.textDark }}>Alerts</div>
