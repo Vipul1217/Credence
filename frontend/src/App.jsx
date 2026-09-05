@@ -94,10 +94,42 @@ const initialMerchants = [
 ];
 
 const initialVerifications = [
-  { id: "VE-9931", seeker: "Ramesh Kumar", merchant: "Bansal Cart Suppliers", match: true, amount: 1200, time: "09:41", mode: "NFC" },
-  { id: "VE-9930", seeker: "Sunita Devi", merchant: "Singh Sewing Traders", match: true, amount: 850, time: "09:22", mode: "QR" },
-  { id: "VE-9929", seeker: "Iqbal Singh", merchant: "New Horizon Textiles", match: false, amount: 2000, time: "08:58", mode: "NFC" },
-  { id: "VE-9928", seeker: "Manjeet Kaur", merchant: "Kapoor Hardware", match: true, amount: 3400, time: "08:30", mode: "QR" },
+  {
+    id: "VE-9931",
+    seeker: "Jashanjeet Singh",
+    merchant: "Bansal Cart Suppliers",
+    match: true,
+    amount: 12000,
+    time: "09:41",
+    mode: "NFC",
+  },
+  {
+    id: "VE-9930",
+    seeker: "Ravi Kumar",
+    merchant: "Bansal Cart Suppliers",
+    match: true,
+    amount: 18000,
+    time: "09:22",
+    mode: "QR",
+  },
+  {
+    id: "VE-9929",
+    seeker: "Meena Devi",
+    merchant: "New Horizon Textiles",
+    match: false,
+    amount: 20000,
+    time: "08:58",
+    mode: "NFC",
+  },
+  {
+    id: "VE-9928",
+    seeker: "Farida Bano",
+    merchant: "Kapoor Hardware",
+    match: false,
+    amount: 15000,
+    time: "08:30",
+    mode: "QR",
+  },
 ];
 
 const NOTIFICATIONS = [
