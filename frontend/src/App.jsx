@@ -32,12 +32,12 @@ const C = {
 
 /* ---------------------------------- MOCK DATA ---------------------------------- */
 const initialApplications = [
-  { id: "APP-1042", name: "Ramesh Kumar", score: 812, band: "high", amount: 20000, category: "Cart & Equipment", date: "2026-08-27", status: "pending" },
-  { id: "APP-1041", name: "Sunita Devi", score: 740, band: "high", amount: 10000, category: "Sewing Equipment", date: "2026-08-27", status: "pending" },
-  { id: "APP-1040", name: "Iqbal Singh", score: 605, band: "medium", amount: 20000, category: "Cart & Equipment", date: "2026-08-26", status: "pending" },
-  { id: "APP-1039", name: "Farida Bano", score: 480, band: "low", amount: 50000, category: "Shop Renovation", date: "2026-08-26", status: "pending" },
-  { id: "APP-1038", name: "Manjeet Kaur", score: 690, band: "medium", amount: 10000, category: "Raw Material", date: "2026-08-25", status: "pending" },
-  { id: "APP-1037", name: "Devendra Yadav", score: 830, band: "high", amount: 20000, category: "Cart & Equipment", date: "2026-08-24", status: "pending" },
+  { id: "APP-1042", name: "Jashanjeet Singh", score: 72, band: "medium", amount: 40000, category: "Cart & Equipment", date: "2026-09-05", status: "pending", safeLimit: 49242, cashflow: "1.00�", debtBurden: "0%", incomeConsistency: "45%", customerDiversity: "40 payers", transactionVelocity: "55/month", repaymentIntegrity: "Zero Bounces", longevity: "11 months", leanPeriodResilience: "Strong" },
+  { id: "APP-1041", name: "Ravi Kumar", score: 81, band: "high", amount: 50000, category: "Cart & Equipment", date: "2026-09-04", status: "pending", safeLimit: 68500, cashflow: "1.18�", debtBurden: "8%", incomeConsistency: "82%", customerDiversity: "56 payers", transactionVelocity: "71/month", repaymentIntegrity: "Zero Bounces", longevity: "19 months", leanPeriodResilience: "Strong" },
+  { id: "APP-1040", name: "Meena Devi", score: 64, band: "medium", amount: 30000, category: "Raw Material", date: "2026-09-04", status: "pending", safeLimit: 35800, cashflow: "0.94�", debtBurden: "14%", incomeConsistency: "61%", customerDiversity: "31 payers", transactionVelocity: "43/month", repaymentIntegrity: "1 late payment", longevity: "9 months", leanPeriodResilience: "Moderate" },
+  { id: "APP-1039", name: "Farida Bano", score: 48, band: "low", amount: 20000, category: "Shop Renovation", date: "2026-09-03", status: "pending", safeLimit: 18000, cashflow: "0.76�", debtBurden: "29%", incomeConsistency: "38%", customerDiversity: "18 payers", transactionVelocity: "29/month", repaymentIntegrity: "2 late payments", longevity: "6 months", leanPeriodResilience: "Weak" },
+  { id: "APP-1038", name: "Manjeet Kaur", score: 69, band: "medium", amount: 30000, category: "Sewing Equipment", date: "2026-09-02", status: "approved", safeLimit: 41200, cashflow: "1.04�", debtBurden: "6%", incomeConsistency: "68%", customerDiversity: "37 payers", transactionVelocity: "49/month", repaymentIntegrity: "Zero Bounces", longevity: "13 months", leanPeriodResilience: "Moderate" },
+  { id: "APP-1037", name: "Devendra Yadav", score: 86, band: "high", amount: 50000, category: "Cart & Equipment", date: "2026-09-01", status: "approved", safeLimit: 74200, cashflow: "1.26�", debtBurden: "4%", incomeConsistency: "88%", customerDiversity: "63 payers", transactionVelocity: "79/month", repaymentIntegrity: "Zero Bounces", longevity: "24 months", leanPeriodResilience: "Strong" },
 ];
 
 const initialLoans = [
@@ -712,9 +712,9 @@ export default function App() {
               <button onClick={() => { setShowProfile(s => !s); setShowNotifs(false); }}
                 aria-label="Officer profile menu" aria-expanded={showProfile} aria-haspopup="true"
                 style={{
-                width: 32, height: 32, borderRadius: "50%", background: C.brown, color: "#fff", border: "none",
-                display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12.5, fontWeight: 700, cursor: "pointer"
-              }}>{initials(officer.name)}</button>
+                  width: 32, height: 32, borderRadius: "50%", background: C.brown, color: "#fff", border: "none",
+                  display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12.5, fontWeight: 700, cursor: "pointer"
+                }}>{initials(officer.name)}</button>
               {showProfile && (
                 <div style={{ position: "absolute", right: 0, top: 40, width: 210, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 8, boxShadow: "0 8px 20px rgba(61,46,31,0.12)", zIndex: 20 }}>
                   <div style={{ padding: "12px 14px", borderBottom: `1px solid ${C.border}` }}>
@@ -1051,11 +1051,82 @@ export default function App() {
                 <Badge tone={bandTone(selectedApp.band)}>{selectedApp.band} band</Badge>
               </div>
             </Card>
-            <div style={{ fontSize: 13.5, color: C.textDark, lineHeight: 1.9, marginBottom: 20 }}>
-              <div><b>Requested amount:</b> ₹{selectedApp.amount.toLocaleString()}</div>
-              <div><b>Purpose category:</b> {selectedApp.category}</div>
-              <div><b>Date applied:</b> {selectedApp.date}</div>
-              <div><b>Document check:</b> <Badge tone="green">Verified</Badge></div>
+            <div style={{ marginBottom: 20 }}>
+
+              <div style={{
+                fontSize: 15,
+                fontWeight: 800,
+                color: C.textDark,
+                marginBottom: 12
+              }}>
+                Underwriting Summary
+              </div>
+
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 10,
+                marginBottom: 18
+              }}>
+                <div style={{ background: C.bg, padding: 12, borderRadius: 10 }}>
+                  <div style={{ fontSize: 11, color: C.muted }}>Trust Score</div>
+                  <div style={{ fontSize: 22, fontWeight: 800 }}>{selectedApp.score}/100</div>
+                </div>
+
+                <div style={{ background: C.bg, padding: 12, borderRadius: 10 }}>
+                  <div style={{ fontSize: 11, color: C.muted }}>Safe Limit</div>
+                  <div style={{ fontSize: 22, fontWeight: 800 }}>
+                    ₹{selectedApp.safeLimit.toLocaleString()}
+                  </div>
+                </div>
+
+                <div style={{ background: C.bg, padding: 12, borderRadius: 10 }}>
+                  <div style={{ fontSize: 11, color: C.muted }}>Cashflow</div>
+                  <div style={{ fontSize: 18, fontWeight: 800 }}>{selectedApp.cashflow}</div>
+                </div>
+
+                <div style={{ background: C.bg, padding: 12, borderRadius: 10 }}>
+                  <div style={{ fontSize: 11, color: C.muted }}>Debt Burden</div>
+                  <div style={{ fontSize: 18, fontWeight: 800 }}>{selectedApp.debtBurden}</div>
+                </div>
+              </div>
+
+              <div style={{
+                fontSize: 15,
+                fontWeight: 800,
+                color: C.textDark,
+                marginBottom: 10
+              }}>
+                Risk Diagnostics
+              </div>
+
+              <div style={{
+                fontSize: 13.5,
+                color: C.textDark,
+                lineHeight: 1.9,
+                marginBottom: 18
+              }}>
+                <div><b>Income Consistency:</b> {selectedApp.incomeConsistency}</div>
+                <div><b>Customer Diversity:</b> {selectedApp.customerDiversity}</div>
+                <div><b>Transaction Velocity:</b> {selectedApp.transactionVelocity}</div>
+                <div><b>Repayment Integrity:</b> {selectedApp.repaymentIntegrity}</div>
+                <div><b>Longevity:</b> {selectedApp.longevity}</div>
+                <div><b>Lean-period Resilience:</b> {selectedApp.leanPeriodResilience}</div>
+              </div>
+
+              <div style={{
+                borderTop: `1px solid ${C.border}`,
+                paddingTop: 14,
+                fontSize: 13.5,
+                color: C.textDark,
+                lineHeight: 1.9
+              }}>
+                <div><b>Requested amount:</b> ₹{selectedApp.amount.toLocaleString()}</div>
+                <div><b>Purpose category:</b> {selectedApp.category}</div>
+                <div><b>Date applied:</b> {selectedApp.date}</div>
+                <div><b>Document check:</b> <Badge tone="green">Verified</Badge></div>
+              </div>
+
             </div>
             {selectedApp.status === "pending" ? (
               <div style={{ display: "flex", gap: 8 }}>
@@ -1098,3 +1169,4 @@ export default function App() {
     </div>
   );
 }
+
